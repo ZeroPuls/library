@@ -2,35 +2,40 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-
+    private boolean isAvailable;
 
     public Book(String title, String author, String isbn) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.isAvailable = true;
     }
 
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public String getIsbn() { return isbn; }
+    public boolean isAvailable() { return isAvailable; }
 
-    public String getTitle() {
-        return title;
-    }
-
-
-    public String getAuthor() {
-        return author;
-    }
-
-
-    public String getIsbn() {
-        return isbn;
-    }
-
+    public void borrowBook() { this.isAvailable = false; }
+    public void returnBook() { this.isAvailable = true; }
 
     @Override
     public String toString() {
         return "Book: " + title + " by " + author + " (ISBN: " + isbn + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Book book = (Book) obj;
+        return isbn.equals(book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return isbn.hashCode();
+    }
 
     public static void main(String[] args) {
         Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", "9780743273565");
@@ -40,3 +45,6 @@ public class Book {
         System.out.println(book2);
     }
 }
+
+
+
